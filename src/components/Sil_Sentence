@@ -1,0 +1,47 @@
+import React, { useState } from 'react';
+import { useDrop } from 'react-dnd';
+
+const Sentence = ({ sentence, handleCheck }) => {
+  const [dutchWords, setDutchWords] = useState([]);
+  const [isCorrect, setIsCorrect] = useState(null);
+
+  const [{ isOver }, drop] = useDrop({
+    accept: 'WORD',
+    drop: (item) => handleDrop(item.id),
+    collect: (monitor) => ({
+      isOver: !!monitor.isOver(),
+    }),
+  });
+
+  const handleDrop = (wordId) => {
+    const draggedWord = dutchWords.find((word) => word.id === wordId);
+    setDutchWords(dutchWords.filter((word) => word.id !== wordId));
+    // Sürüklenen kelimeyi işle
+  };
+
+  const handleCheckSentence = () => {
+    // Cümlenin kontrolünü yap ve sonucu belirle
+    // Örneğin:
+    // const isCorrect = true; // veya false;
+    // setIsCorrect(isCorrect);
+  };
+
+  return (
+    <div>
+      <h2>Türkçe Cümle:</h2>
+      <p>{sentence}</p>
+      <div ref={drop} style={{ border: isOver ? '2px dashed black' : 'none' }}>
+        <h2>Hollandaca Kelimeleri Sırala:</h2>
+        {dutchWords.map((word) => (
+          <div key={word.id}>{word.word}</div>
+        ))}
+      </div>
+      <button onClick={handleCheckSentence}>Kontrol Et</button>
+      {isCorrect !== null && (
+        <p>{isCorrect ? 'Cümlenin doğru olduğu doğrulandı.' : 'Cümlenin yanlış olduğu doğrulandı.'}</p>
+      )}
+    </div>
+  );
+};
+
+export default Sentence;

@@ -1,0 +1,36 @@
+import React from 'react';
+import { useDrag } from 'react-dnd';
+
+const DutchWord = ({ word, id }) => {
+  const [{ isDragging }, drag] = useDrag({
+    item: { type: 'WORD', id },
+    collect: (monitor) => ({
+      isDragging: !!monitor.isDragging(),
+    }),
+  });
+
+  return (
+    <div
+      ref={drag}
+      style={{
+        opacity: isDragging ? 0.5 : 1,
+        cursor: 'pointer',
+      }}
+    >
+      {word}
+    </div>
+  );
+};
+
+const DutchWords = ({ words }) => {
+  return (
+    <div>
+      <h2>Hollandaca Kelimeler:</h2>
+      {words.map((word, index) => (
+        <DutchWord key={index} word={word} id={index} />
+      ))}
+    </div>
+  );
+};
+
+export default DutchWords;
