@@ -24,9 +24,9 @@ const Boeken = ({ boeken, onBoekClick}) => {
         <MDBCardBody>
           <MDBCardTitle>{boek.boek}</MDBCardTitle>
           <MDBCardText>
-          <MDBBtn href='#'  onClick={() => onBoekClick(2,index)}>Spreken</MDBBtn>
+          <MDBBtn href='#'  onClick={() => onBoekClick(2,index, boek.boekMap)}>Spreken</MDBBtn>
           </MDBCardText>
-          <MDBBtn href='#'  onClick={() => onBoekClick(1,index)}>Luisteren</MDBBtn>
+          <MDBBtn href='#'  onClick={() => onBoekClick(1,index, boek.boekMap)}>Luisteren</MDBBtn>
         </MDBCardBody>
       </MDBCard>
     ))}

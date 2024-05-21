@@ -33,7 +33,7 @@ function OefenenPagina({onPreviusMenuClick, lesSentences, lesStatistieken, handl
   //shuffledDutchWords Karıştırılan Hollandaca kelimeler Hollandaca kelimeler alanındaki kelimeler
   // sortedDutchWords Sıralama alanındaki kelimeler
 
-  const [boekMapp, setBoekMapp] =useState("./sound/"+boekMap+"/");
+  const [boekMapp, setBoekMapp] =useState("./GoedBezig/sound/"+boekMap+"/");
   const [currentSentenceIndex, setCurrentSentenceIndex] = useState(0);  // useState hook'u kullanarak bileşenin içinde kullanacağımız state'leri tanımlıyoruz. 
   const [shuffledDutchWords, setShuffledDutchWords] = useState([]);  
   const [sortedDutchWords, setSortedDutchWords] = useState([]);

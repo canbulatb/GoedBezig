@@ -8,8 +8,13 @@ const AudioPlayer = ({ src }) => {
   useEffect(() => {
     if (audioRef.current) {
         if (audioRef.current && src) { // Ses dosyası varsa ve src prop'u doluysa
+
             audioRef.current.load(); // Ses dosyasını yükle
-            audioRef.current.play(); // Ses dosyasını otomatik olarak çal
+            try {
+            audioRef.current.play(); // Ses dosyasını otomatik olarak çal  
+            } catch (error) {
+            }
+            
         }
     }
   }, [src]);
