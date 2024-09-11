@@ -59,15 +59,15 @@ function OefenenPagina({onPreviusMenuClick, lesSentences, lesStatistieken, handl
   },[correctControl])
 
   const shuffleWords = () => {   //Bu fonksiyon, seçilen cümleye ait Hollandaca kelimeleri karıştırıp shuffledDutchWords state'ine atar.
-    const shuffledWords = [...lesSentences[currentSentenceIndex].dutch.split(" ")].sort(() => Math.random() - 0.5);
-    setShuffledDutchWords(shuffledWords);
+    const shuffledDutchWords = [...lesSentences[currentSentenceIndex].dutch.split(" ")].map((word, index) => ({ word, index })).sort(() => Math.random() - 0.5);
+    setShuffledDutchWords(shuffledDutchWords);
     console.log(lesSentences[currentSentenceIndex].turkish);
     handleWordxClick();
     setSortedDutchWords([]);  //Belki bu satıra gerekyok. Kontrol edeceğim
   };
 
   function checkAccuracy (word) {
-    const sortedSentence = sortedDutchWords.join(' ')+ " "+ word;
+    const sortedSentence = sortedDutchWords.map(item => item.word).join(' ') + " " + word;
     const originalSentence = lesSentences[currentSentenceIndex].dutch;
   
     if (sortedSentence === originalSentence) {  // siralanan metin ile orjinal metin karsilastiriliyor. 
@@ -79,11 +79,12 @@ function OefenenPagina({onPreviusMenuClick, lesSentences, lesStatistieken, handl
     }
   };
 
-  const handleWordClick = (word,path) => {  //Bu fonksiyon, Hollandaca kelimeler alanındaki bir kelimeye tıklandığında çalışır. Seçilen kelimeyi sortedDutchWords state'ine ekler ve shuffledDutchWords state'inden kaldırır.
+  const handleWordClick = (word,index,path) => {  //Bu fonksiyon, Hollandaca kelimeler alanındaki bir kelimeye tıklandığında çalışır. Seçilen kelimeyi sortedDutchWords state'ine ekler ve shuffledDutchWords state'inden kaldırır.
     //setAudioSrc(`./sound/${word}.mp3`); // Kelimenin doğru ses dosyasının yolunu belirtin
-    setShuffledDutchWords(shuffledDutchWords.filter((w) => w !== word));
-    setSortedDutchWords([...sortedDutchWords, word]);
-    checkAccuracy(word); // word eklendikten sonra dogruluk kontrolunu yaptiriyoruz.  
+
+    setShuffledDutchWords(shuffledDutchWords.filter((item) => item.index != index));
+    setSortedDutchWords([...sortedDutchWords, {word, index}]);
+    checkAccuracy(word,index); // word eklendikten sonra dogruluk kontrolunu yaptiriyoruz.  
     console.log(path);
     //setAudioSrc(path+word+'.mp3'); // Kelimenin doğru ses dosyasının yolunu belirtin
     
@@ -102,9 +103,9 @@ function OefenenPagina({onPreviusMenuClick, lesSentences, lesStatistieken, handl
     
   };
 
-  const handleSortedWordClick = (word) => {  //Bu fonksiyon, sıralama alanındaki bir kelimeye tıklandığında çalışır. Seçilen kelimeyi shuffledDutchWords state'ine ekler ve sortedDutchWords state'inden kaldırır.
-    setSortedDutchWords(sortedDutchWords.filter((w) => w !== word));
-    setShuffledDutchWords([...shuffledDutchWords, word]);
+  const handleSortedWordClick = (word, index) => {  //Bu fonksiyon, sıralama alanındaki bir kelimeye tıklandığında çalışır. Seçilen kelimeyi shuffledDutchWords state'ine ekler ve sortedDutchWords state'inden kaldırır.
+    setSortedDutchWords(sortedDutchWords.filter((item) => item.index != index));
+    setShuffledDutchWords([...shuffledDutchWords, {word, index}]);
 
   };
 
@@ -146,7 +147,7 @@ function OefenenPagina({onPreviusMenuClick, lesSentences, lesStatistieken, handl
     <div>
       <h1>{boeken}</h1>
       <AudioPlayer src={audioSrc} />
-      <PictoResimEkle wordsx={lesSentences[currentSentenceIndex].turkish} wordPath={boekMap} onWordClick={handleWordxClick} wordsNl={lesSentences[currentSentenceIndex].dutch} onWordNlClick={handleWordNlClick} />      
+      <PictoResimEkle words={lesSentences[currentSentenceIndex].dutch.split(" ")}  wordsx={lesSentences[currentSentenceIndex].turkish} wordPath={boekMap} onWordClick={handleWordxClick} wordsNl={lesSentences[currentSentenceIndex].dutch} onWordNlClick={handleWordNlClick} />      
       <ShuffleWords words={shuffledDutchWords} onWordClick={handleWordClick} path={"./sound/"} />
       <SortingArea sortedWords={sortedDutchWords} onSortedWordClick={handleSortedWordClick} />
       <ControlPanel onNextSentenceClick={handleNextSentenceClick} onPreviusSentenceClick={handlePreviusSentenceClick} controlClick={handelCorrectControl} correctControl={correctControl} onPreviusMenu={onPreviusMenuClick} controlEinde={controlEinde} handleControlEinde={handleControlEinde} /> 
