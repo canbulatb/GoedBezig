@@ -139,7 +139,7 @@ function OefenenSpreken({onPreviusMenuClick, lesSentences, lesStatistieken, hand
       <AudioPlayer src={audioSrc} />
       <PictoResimEkle wordsx={lesSentences[currentSentenceIndex].turkish} wordPath={boekMap} onWordClick={handleWordxClick} wordsNl={lesSentences[currentSentenceIndex].dutch} onWordNlClick={handleWordNlClick} />      
       <Spreken checkAccuracy={checkAccuracy} correctControl={correctControl} isListening={isListening}  handleIsListening={handleIsListening} />
-      <ControlPanel onNextSentenceClick={handleNextSentenceClick} onPreviusSentenceClick={handlePreviusSentenceClick} controlClick={handelCorrectControl} correctControl={correctControl} onPreviusMenu={onPreviusMenuClick} controlEinde={controlEinde} handleControlEinde={handleControlEinde} /> 
+      <ControlPanel lesSentences={lesSentences[currentSentenceIndex].dutch} onNextSentenceClick={handleNextSentenceClick} onPreviusSentenceClick={handlePreviusSentenceClick} controlClick={handelCorrectControl} correctControl={correctControl} onPreviusMenu={onPreviusMenuClick} controlEinde={controlEinde} handleControlEinde={handleControlEinde} /> 
     </div>
     <h3>Waar: {lesStatistieken[0].waar} / {lesStatistieken[0].lengte} </h3>
     <h3>fout: {lesStatistieken[0].fout} / {lesStatistieken[0].lengte} </h3>

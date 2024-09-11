@@ -19,6 +19,7 @@ import Spreken from './Spreken';
 
 
 function OefenenPagina({onPreviusMenuClick, lesSentences, lesStatistieken, handleWaar, boeken, boekMap}) {
+    
   function splitSentences(lesSentences) {
     const result = [];
     lesSentences.forEach(sentence => {
@@ -28,7 +29,6 @@ function OefenenPagina({onPreviusMenuClick, lesSentences, lesStatistieken, handl
     });
     return result;
 }
-
 
   //shuffledDutchWords Karıştırılan Hollandaca kelimeler Hollandaca kelimeler alanındaki kelimeler
   // sortedDutchWords Sıralama alanındaki kelimeler
@@ -150,7 +150,7 @@ function OefenenPagina({onPreviusMenuClick, lesSentences, lesStatistieken, handl
       <PictoResimEkle words={lesSentences[currentSentenceIndex].dutch.split(" ")}  wordsx={lesSentences[currentSentenceIndex].turkish} wordPath={boekMap} onWordClick={handleWordxClick} wordsNl={lesSentences[currentSentenceIndex].dutch} onWordNlClick={handleWordNlClick} />      
       <ShuffleWords words={shuffledDutchWords} onWordClick={handleWordClick} path={"./sound/"} />
       <SortingArea sortedWords={sortedDutchWords} onSortedWordClick={handleSortedWordClick} />
-      <ControlPanel onNextSentenceClick={handleNextSentenceClick} onPreviusSentenceClick={handlePreviusSentenceClick} controlClick={handelCorrectControl} correctControl={correctControl} onPreviusMenu={onPreviusMenuClick} controlEinde={controlEinde} handleControlEinde={handleControlEinde} /> 
+      <ControlPanel lesSentences={lesSentences[currentSentenceIndex].dutch} onNextSentenceClick={handleNextSentenceClick} onPreviusSentenceClick={handlePreviusSentenceClick} controlClick={handelCorrectControl} correctControl={correctControl} onPreviusMenu={onPreviusMenuClick} controlEinde={controlEinde} handleControlEinde={handleControlEinde} /> 
     </div>
     <h3>Waar: {lesStatistieken[0].waar} / {lesStatistieken[0].lengte} </h3>
     <h3>fout: {lesStatistieken[0].fout} / {lesStatistieken[0].lengte} </h3>
