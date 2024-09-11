@@ -9,7 +9,8 @@ const SortingArea = ({ sortedWords, onSortedWordClick }) => {
       
         {sortedWords.map((item) => (
           <div key={item.index} onClick={() => onSortedWordClick(item.word, item.index)} style={{ display: 'inline-block', marginRight: '10px', fontSize:'30px' , color:'blue' , minHeight:'50px' }}>
-            {item.word.replace(/\d+/g, '')}
+            {item.word} {//.replace(/\d+/g, '')
+            }
           </div>
         ))}
     </div>

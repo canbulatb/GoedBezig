@@ -13,7 +13,7 @@ console.log(words)
         onClick={() => onWordClick(item.word, item.index, path)} 
         style={{ display: 'inline-block', marginRight: '10px', fontSize: '30px', color: 'red', minHeight: '50px' }}
       >
-        {item.word.replace(/\d+/g, '')}
+        {item.word}
       </div>
     ))}
   </div>
