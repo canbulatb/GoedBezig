@@ -1,7 +1,12 @@
 import React from 'react';
-const PictoResimEkle = ({ wordsx, wordPath , onWordClick, wordsNl, onWordNlClick}) => {
+const PictoResimEkle = ({ words, wordsx, wordPath , onWordClick, wordsNl, onWordNlClick}) => {
 const path="./sound/"+wordPath+"/";
-  return (
+//{words.map((word, index) => (
+//  <img src={`./GoedBezig/pictohareket/${word}.png`} alt={word} style={{ width: '100px', height: 'auto' }}   key={index} />
+//))}
+
+return (
+
     <div>
     <div><img src={`./pictohareket/goedBezig.png`}  style={{ width: '300px', height: 'auto' }}  /> </div>
     <div key={0} onClick={() => onWordClick(wordsx,path )} style={{ display: 'inline-block', marginRight: '10px', fontSize:'30px', color:'blue' }}>
